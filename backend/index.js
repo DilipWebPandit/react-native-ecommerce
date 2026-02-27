@@ -9,11 +9,11 @@ import connectDB from "./src/config/db.js";
 
 dotenv.config();
 
-const port = 8080;
+const port = process.env.PORT || 5000;
 
 // connected to db
 connectDB();
 
 app.listen(port, () => {
-  console.log("Server is listing on port 8080");
+  console.log(`Server is listening on port ${port}`);
 });
