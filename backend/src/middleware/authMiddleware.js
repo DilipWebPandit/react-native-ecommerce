@@ -1,0 +1,44 @@
+import jwt from "jsonwebtoken";
+import userModel from "../models/userModel.js";
+
+export const protect = async (req, res, next) => {
+  let token;
+
+  //   console.log("Authorization Header:", req.headers);
+
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith("Bearer")
+  ) {
+    try {
+      token = req.headers.authorization.split(" ")[1];
+
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+      req.user = await userModel.findById(decoded.id).select("-password");
+
+      console.log("inside prtect", req.user);
+
+      next();
+    } catch (error) {
+      res.status(401).json({ message: "Not authorized, token failed" });
+    }
+  }
+
+  if (!token) {
+    return res.status(401).json({ message: "Not authorized, no token" });
+  }
+};
+
+export const admin = async (req, res, next) => {
+  // console.log("This is admin middleware");
+  // console.log("This is req.user", req.user);
+  // console.log("This is req.user.isAdmin", req.user.isAdmin);
+  if (req.user && req.user.isAdmin) {
+    console.log("Admin granted the access");
+    next();
+  } else {
+    console.log("Admin denied the access");
+    res.status(403).json({ message: "Access denied. Admin only." });
+  }
+};
