@@ -4,6 +4,10 @@ import productModel from "../models/productModel.js";
 
 export const createProduct = async (req, res) => {
   try {
+    const imageData = req.files.map((file) => ({
+      url: file.url,
+    }));
+
     const { name, description, price, category, countInStock } = req.body;
 
     const product = new productModel({
@@ -12,6 +16,7 @@ export const createProduct = async (req, res) => {
       price,
       category,
       countInStock,
+      images: imageData,
       user: req.user._id,
     });
     const createProduct = await product.save();
