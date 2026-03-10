@@ -4,7 +4,7 @@ import productModel from "../models/productModel.js";
 
 export const createProduct = async (req, res) => {
   try {
-    const imageData = req.files.map((file) => ({
+    const imageData = (req.files || []).map((file) => ({
       url: file.url,
     }));
 
