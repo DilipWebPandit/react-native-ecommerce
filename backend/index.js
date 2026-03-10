@@ -6,6 +6,7 @@ import connectDB from "./src/config/db.js";
 // const secrete = crypto.randomBytes(64).toString("hex");
 
 // console.log(secrete);
+// const app = express;
 
 dotenv.config();
 

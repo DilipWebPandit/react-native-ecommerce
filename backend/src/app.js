@@ -8,9 +8,9 @@ import checkoutRoutes from "./routes/orderRoutes.js";
 const app = express();
 
 // middlewaress
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
