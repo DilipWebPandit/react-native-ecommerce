@@ -10,8 +10,13 @@ export const createProduct = async (req, res) => {
 
     const { name, description, price, category, countInStock } = req.body;
 
-    console.log("This is file", req.files);
-    console.log("This is image Data", imageData);
+    // console.log("This is file", req.files);
+    // console.log("This is image Data", imageData);
+    // console.log("This is req.body", req.body);
+
+    // console.log("req.body:", req.body); // check this in deployment logs
+    // console.log("req.files:", req.files); // check this too
+    // console.log("CLOUD_NAME:", process.env.CLOUD_NAME); // should NOT be undefined
 
     const product = new productModel({
       name,
