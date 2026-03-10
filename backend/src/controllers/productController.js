@@ -8,6 +8,9 @@ export const createProduct = async (req, res) => {
       url: file.url,
     }));
 
+    console.log("This is files", req.files);
+    console.log("This is imageData", imageData);
+
     const { name, description, price, category, countInStock } = req.body;
 
     const product = new productModel({
