@@ -17,7 +17,7 @@ router
   .delete(protect, clearCart);
 
 router
-  .route("/:prodcutId")
+  .route("/:productId")
   .put(protect, updateCartItem)
   .delete(protect, removeCartItem);
 
