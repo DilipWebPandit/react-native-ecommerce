@@ -3,8 +3,6 @@ import {
   createProduct,
   getProducts,
   getProductById,
-  updateProduct,
-  deleteProdcut,
 } from "../controllers/productController.js";
 import { admin, protect } from "../middleware/authMiddleware.js";
 import upload from "../middleware/upload.js";
@@ -15,10 +13,7 @@ router
   .route("/")
   .post(protect, admin, upload.array("images", 5), createProduct)
   .get(getProducts);
-router
-  .route("/:id")
-  .get(getProductById)
-  .put(protect, admin, upload.array("images", 5), updateProduct)
-  .delete(protect, admin, deleteProdcut);
+
+router.route("/:id").get(getProductById);
 
 export default router;
