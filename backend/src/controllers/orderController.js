@@ -8,7 +8,7 @@ export const checkout = async (req, res) => {
     // const cart = await Cart.findOne({ user: req.user.id });
 
     const cart = await Cart.findOne({ user: req.user.id })
-  .populate("items.product", "name price image");
+  .populate("items.product", "name price images");
 
     if (!cart || cart.items.length === 0) {
       return res.status(400).json({ message: "Cart is empty" });
