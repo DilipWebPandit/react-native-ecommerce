@@ -5,7 +5,10 @@ import productModel from "../models/productModel.js";
 
 export const checkout = async (req, res) => {
   try {
-    const cart = await Cart.findOne({ user: req.user.id });
+    // const cart = await Cart.findOne({ user: req.user.id });
+
+    const cart = await Cart.findOne({ user: req.user.id })
+  .populate("items.product", "name price image");
 
     if (!cart || cart.items.length === 0) {
       return res.status(400).json({ message: "Cart is empty" });
