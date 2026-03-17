@@ -1,6 +1,7 @@
 // import orderModel from "../models/orderModel";
 import Order from "../models/orderModel.js";
 import Cart from "../models/cartModel.js";
+import productModel from "../models/productModel.js";
 
 export const checkout = async (req, res) => {
   try {
@@ -13,12 +14,13 @@ export const checkout = async (req, res) => {
     let totalPrice = 0;
 
     for (let item of cart.items) {
-      if (item.product.countInStock < item.quantity) {
+      const products = await productModel.findById(item.product);
+      if (products.countInStock < item.quantity) {
         return res.status(400).json({
           message: `${item.product.name} is out of stock`,
         });
       }
-      totalPrice += item.product.price * item.quantity;
+      totalPrice += products.price * item.quantity;
     }
 
     res.status(200).json({
