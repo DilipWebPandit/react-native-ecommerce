@@ -10,7 +10,7 @@ import {
 const router = express.Router();
 
 router.get("/checkout", protect, checkout);
-router.post("/", protect, placeOrder);
+router.post("/place", protect, placeOrder);
 router.put("/:id/pay", protect, payOrder);
 router.get("/myOrders", protect, getMyOrders);
 
