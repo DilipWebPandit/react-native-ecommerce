@@ -98,7 +98,8 @@ export const placeOrder = async (req, res) => {
     // res.status(201).json();
     res.status(201).json({
       message: "Order placed successfully",
-      orderId: order._id,
+      // orderId: order._id,
+      order,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
