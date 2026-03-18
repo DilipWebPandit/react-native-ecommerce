@@ -39,11 +39,19 @@ export const placeOrder = async (req, res) => {
   try {
     const { shippingAddress, paymentMethod } = req.body;
 
+    if (!shippingAddress) {
+      return res.status(400).json({ message: "Shipping address required" });
+    }
+
+    if (!paymentMethod) {
+      return res.status(400).json({ message: "Payment method required" });
+    }
+
     const cart = await Cart.findOne({ user: req.user.id }).populate(
       "items.product",
     );
 
-    if (cart || cart.items.length === 0) {
+    if (!cart || cart.items.length === 0) {
       return res.status(400).json({ message: "Cart is empty" });
     }
 
@@ -87,7 +95,11 @@ export const placeOrder = async (req, res) => {
     cart.items = [];
     await cart.save();
 
-    res.status(201).json();
+    // res.status(201).json();
+    res.status(201).json({
+      message: "Order placed successfully",
+      orderId: order._id,
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
