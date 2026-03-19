@@ -4,6 +4,7 @@ import {
   changePassword,
   updateProfileInfo,
   deleteProfile,
+  updateAddress,
 } from "../controllers/updateProfileController.js";
 
 import { protect } from "../middleware/authMiddleware.js";
