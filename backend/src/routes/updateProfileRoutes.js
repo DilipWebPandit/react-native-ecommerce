@@ -11,8 +11,21 @@ import upload from "../middleware/uploadMiddleware.js";
 
 const router = express.Router();
 
+// router.put("/changePassword", protect, changePassword);
+// router.put("/basicInfo", protect, upload.single("profileImage"), updateProfileInfo);
+// router.delete("/deleteUser", protect, deleteProfile);
+
 router.put("/changePassword", protect, changePassword);
-router.put("/basicInfo", protect, upload.single("profileImage"), updateProfileInfo);
+
+router.put(
+  "/basicInfo",
+  protect,
+  upload.single("profileImage"),
+  updateProfileInfo
+);
+
+router.put("/address/:addressId", protect, updateAddress);
+
 router.delete("/deleteUser", protect, deleteProfile);
 
 export default router;
