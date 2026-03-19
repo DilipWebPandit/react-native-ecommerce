@@ -35,6 +35,10 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    profileImage: {
+  type: String,
+  default: "",
+},
     addresses: [addressSchema],
     isDeleted: {
       type: Boolean,
