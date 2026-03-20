@@ -1,4 +1,5 @@
 import userModel from "../models/userModel.js";
+import cloudinary from "../config/cloudinary.js";
 
 // change password
 // export const changePassword = async (req, res) => {
@@ -130,7 +131,7 @@ export const updateProfileInfo = async (req, res) => {
     if (req.file) {
       // 1. Delete old image (if exists)
       if (user.profileImage?.public_id) {
-        await cloudinary.uploader.destroy(user.profileImage.public_id);
+        await cloudinary.v2.uploader.destroy(user.profileImage.public_id);
       }
 
       // 2. Save new image
