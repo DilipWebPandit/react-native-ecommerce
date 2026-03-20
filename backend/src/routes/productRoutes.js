@@ -9,6 +9,8 @@ import upload from "../middleware/upload.js";
 
 const router = express.Router();
 
+console.log("This is products");
+
 router
   .route("/")
   .post(protect, admin, upload.array("images", 5), createProduct)

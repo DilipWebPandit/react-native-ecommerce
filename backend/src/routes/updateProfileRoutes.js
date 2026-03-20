@@ -9,7 +9,8 @@ import {
 
 import { protect } from "../middleware/authMiddleware.js";
 // import upload from "../middleware/uploadMiddleware.js";
-import upload from "../middleware/upload.js";
+// import upload from "../middleware/upload.js";
+import usersProfilePic from "../middleware/uploadProfilePic.js";
 
 const router = express.Router();
 
@@ -22,8 +23,8 @@ router.put("/changePassword", protect, changePassword);
 router.put(
   "/basicInfo",
   protect,
-  upload.single("profileImage"),
-  updateProfileInfo
+  usersProfilePic.single("profileImage"),
+  updateProfileInfo,
 );
 
 router.put("/address/:addressId", protect, updateAddress);

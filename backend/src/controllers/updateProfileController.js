@@ -111,6 +111,8 @@ export const updateProfileInfo = async (req, res) => {
   try {
     const user = await userModel.findById(req.user._id);
 
+    console.log("This is req.file", req.file);
+
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -121,8 +123,21 @@ export const updateProfileInfo = async (req, res) => {
     if (email) user.email = email;
 
     // image from multer
+    // if (req.file) {
+    //   user.profileImage = req.file.url;
+    // }
+
     if (req.file) {
-      user.profileImage = req.file.path;
+      // 1. Delete old image (if exists)
+      if (user.profileImage?.public_id) {
+        await cloudinary.uploader.destroy(user.profileImage.public_id);
+      }
+
+      // 2. Save new image
+      user.profileImage = {
+        public_id: req.file.public_id,
+        url: req.file.secure_url,
+      };
     }
 
     await user.save();

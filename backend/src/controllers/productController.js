@@ -8,7 +8,11 @@ export const createProduct = async (req, res) => {
       url: file.url,
     }));
 
+    console.log("This is image data", imageData);
+
     const { name, description, price, category, countInStock } = req.body;
+
+    console.log("This is req.body inside the createproducts", req.body);
 
     // console.log("This is file", req.files);
     // console.log("This is image Data", imageData);
@@ -45,7 +49,11 @@ export const getProducts = async (req, res) => {
     // 2-1 = 1, 1*5 = 5 so i have to show from 6 to 30 products
     const skip = (page - 1) * limit;
 
-    const products = await productModel.find().limit(limit).skip(skip);
+    const products = await productModel
+      .find()
+      .sort({ createdAt: -1 })
+      .limit(limit)
+      .skip(skip);
 
     const total = await productModel.countDocuments();
 
