@@ -35,10 +35,10 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    profileImage: {
-  type: String,
-  default: "",
-},
+   profileImage: {
+      url: String,
+      public_id: String,
+  },
     addresses: [addressSchema],
     isDeleted: {
       type: Boolean,
