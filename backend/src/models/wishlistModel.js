@@ -19,7 +19,7 @@ const wishlistSchema = new mongoose.Schema(
       },
     ],
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 export default mongoose.model("Wishlist", wishlistSchema);
